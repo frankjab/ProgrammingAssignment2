@@ -28,7 +28,7 @@ cacheSolve <- function(x, ...) {
         m <- x$get.solve()
         # If m is not empty return m, its been calculated already
         if(!is.null(m)){
-                message("")
+                message("getting cached data")
                 return(m)
         }
         # else inverse the matrix and return
