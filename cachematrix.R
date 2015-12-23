@@ -12,11 +12,11 @@ makeCacheMatrix <- function(x = matrix()) {
                 m <<- NULL  # m, an empty variable
         }
         get <- function() x  # when called the matrix x is returned
-        setinverse <- function(solve) m <<- solve
-        getinverse <- function() m  # when called m is returned (e.g. NULL until cacheSolve is called)
+        set.solve <- function(solve) m <<- solve
+        get.solve <- function() m  # when called m is returned (e.g. NULL until cacheSolve is called)
         list(set = set, get = get,
-             setinverse = setinverse,
-             getinverse = getinverse)
+             set.solve = set.solve,
+             get.solve = get.solve)
 }
 
 # cacheSolve computes the inverse of the special "matrix" returned by makeCacheMatrix
@@ -25,7 +25,7 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
         # On the  first run, cacheSolve finds m empty and goes to the else instruction, calculates m and returns it
         # On subsequent runs, m is no longer Null, so m is returned via m <- x$getinverse())
-        m <- x$getinverse()
+        m <- x$get.solve()
         # If m is not empty return m, its been calculated already
         if(!is.null(m)){
                 message("")
@@ -34,6 +34,6 @@ cacheSolve <- function(x, ...) {
         # else inverse the matrix and return it
         data <- x$get()  # get the matrix
         m <- solve(data, ...)  # inverse the matrix
-        x$setinverse(m)  #set 
+        x$set.solve(m)  #set 
         m # return inverse matrix
 }
