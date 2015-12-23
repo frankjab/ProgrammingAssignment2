@@ -31,7 +31,7 @@ cacheSolve <- function(x, ...) {
                 message("")
                 return(m)
         }
-        # else inverse the matrix and return it
+        # else inverse the matrix and return
         data <- x$get()  # get the matrix
         m <- solve(data, ...)  # inverse the matrix
         x$set.solve(m)  #set 
